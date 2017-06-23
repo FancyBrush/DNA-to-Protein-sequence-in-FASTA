@@ -25,7 +25,7 @@ void Output(){
 		printf("%c", pro[i] );
 	}
 	printf("\n");
-	printf("Total Amino Acid Residue Number : %d\n",pro_len);
+	printf("Total Amino Acid Residue Number : %d\n\n",pro_len);
 }
 
 
@@ -65,17 +65,19 @@ void toFasta(){
 			if (seq[i] == 'T' && seq[i+1] == 'A' && seq[i+2] == 'T'){
 				pro[j++] = 'Y';
 			}
+			// stop codon using '_'
+			if (seq[i] == 'T' && seq[i+1] == 'A' && seq[i+2] == 'A'){
+				pro[j++] = '_';
+			}
 
-			/*if (seq[i] == 'T' && seq[i+1] == 'A' && seq[i+2] == 'A'){
+			if (seq[i] == 'T' && seq[i+1] == 'A' && seq[i+2] == 'G'){
 				pro[j++] = '_';
-			}*/
+			}
+			if (seq[i] == 'T' && seq[i+1] == 'G' && seq[i+2] == 'A'){
+				pro[j++] = '_';
+			}
+			// stop codon using '_'
 
-			/*if (seq[i] == 'T' && seq[i+1] == 'A' && seq[i+2] == 'G'){
-				pro[j++] = '_';
-			}*/
-			/*if (seq[i] == 'T' && seq[i+1] == 'G' && seq[i+2] == 'A'){
-				pro[j++] = '_';
-			}*/
 			if (seq[i] == 'T' && seq[i+1] == 'G' && seq[i+2] == 'C'){
 				pro[j++] = 'C';
 			}
@@ -92,8 +94,8 @@ void toFasta(){
 			if (seq[i] == 'C' && seq[i+1] == 'T' && seq[i+2] == 'C'){
 				pro[j++] = 'L';
 			}
-			if (seq[i] == 'C' && seq[i+1] == 'T' && 
-				seq[i+2] == 'G'){pro[j++] = 'L';
+			if (seq[i] == 'C' && seq[i+1] == 'T' && seq[i+2] == 'G')
+				{pro[j++] = 'L';
 			}
 			if (seq[i] == 'C' && seq[i+1] == 'T' && seq[i+2] == 'T'){
 				pro[j++] = 'L';
@@ -236,7 +238,6 @@ void toFasta(){
 		printf("Frame %d :\n", f+1);
 		pro_len = j;
 		Output();
-		Output1000();
 		j = 0;
 	}
 }
