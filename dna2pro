@@ -1,0 +1,251 @@
+#include <stdio.h>
+#include <string.h>
+
+char seq[10000], pro[10000];
+int seq_len, pro_len;
+
+void Input (){
+
+	int i, j;
+	printf("Type the seq (PRESS Q TO END INPUT):\n");
+	for (i = 0; ; i++){
+		scanf("%c",&seq[i]);
+		if (seq[i] == 'Q')
+			break;
+	}	
+	seq_len = i-1;
+	printf("Total Nucleic Acid Number : %d\n", seq_len);
+
+}
+void Output(){
+
+	int i;
+	printf("Translated in FASTA:\n");
+	for (i = 0; i <= pro_len; i++){
+		printf("%c", pro[i] );
+	}
+	printf("\n");
+	printf("Total Amino Acid Residue Number : %d\n",pro_len);
+}
+
+
+void toFasta(){
+
+	int i, j, N, f = 0;
+	j = 0;
+	for (f = 0; f < 3; f++){ // 三个移码框
+		for (i = f; i < seq_len; i = i+3){
+			if (seq[i] == 'T' && seq[i+1] == 'C' && seq[i+2] == 'C'){
+				pro[j++] = 'S';
+			}
+			if (seq[i] == 'T' && seq[i+1] == 'C' && seq[i+2] == 'C'){
+				pro[j++] = 'S';
+			}
+			if (seq[i] == 'T' && seq[i+1] == 'C' && seq[i+2] == 'G'){
+				pro[j++] = 'S';
+			}
+			if (seq[i] == 'T' && seq[i+1] == 'C' && seq[i+2] == 'T'){
+				pro[j++] = 'S';
+			}
+			if (seq[i] == 'T' && seq[i+1] == 'T' && seq[i+2] == 'C'){
+				pro[j++] = 'F';
+			}
+			if (seq[i] == 'T' && seq[i+1] == 'T' && seq[i+2] == 'T'){
+				pro[j++] = 'F';
+			}
+			if (seq[i] == 'T' && seq[i+1] == 'T' && seq[i+2] == 'A'){
+				pro[j++] = 'L';
+			}
+			if (seq[i] == 'T' && seq[i+1] == 'T' && seq[i+2] == 'G'){
+				pro[j++] = 'L';
+			}
+			if (seq[i] == 'T' && seq[i+1] == 'A' && seq[i+2] == 'C'){
+				pro[j++] = 'Y';
+			}
+			if (seq[i] == 'T' && seq[i+1] == 'A' && seq[i+2] == 'T'){
+				pro[j++] = 'Y';
+			}
+
+			/*if (seq[i] == 'T' && seq[i+1] == 'A' && seq[i+2] == 'A'){
+				pro[j++] = '_';
+			}*/
+
+			/*if (seq[i] == 'T' && seq[i+1] == 'A' && seq[i+2] == 'G'){
+				pro[j++] = '_';
+			}*/
+			/*if (seq[i] == 'T' && seq[i+1] == 'G' && seq[i+2] == 'A'){
+				pro[j++] = '_';
+			}*/
+			if (seq[i] == 'T' && seq[i+1] == 'G' && seq[i+2] == 'C'){
+				pro[j++] = 'C';
+			}
+
+			if (seq[i] == 'T' && seq[i+1] == 'G' && seq[i+2] == 'T'){
+				pro[j++] = 'C';
+			}
+			if (seq[i] == 'T' && seq[i+1] == 'G' && seq[i+2] == 'G'){
+				pro[j++] = 'W';
+			}
+			if (seq[i] == 'C' && seq[i+1] == 'T' && seq[i+2] == 'A'){
+				pro[j++] = 'L';
+			}
+			if (seq[i] == 'C' && seq[i+1] == 'T' && seq[i+2] == 'C'){
+				pro[j++] = 'L';
+			}
+			if (seq[i] == 'C' && seq[i+1] == 'T' && 
+				seq[i+2] == 'G'){pro[j++] = 'L';
+			}
+			if (seq[i] == 'C' && seq[i+1] == 'T' && seq[i+2] == 'T'){
+				pro[j++] = 'L';
+			}
+			if (seq[i] == 'C' && seq[i+1] == 'C' && seq[i+2] == 'A'){
+				pro[j++] = 'P';
+			}
+			if (seq[i] == 'C' && seq[i+1] == 'C' && seq[i+2] == 'C'){
+				pro[j++] = 'P';
+			}
+			if (seq[i] == 'C' && seq[i+1] == 'C' && seq[i+2] == 'G'){
+				pro[j++] = 'P';
+			}
+			if (seq[i] == 'C' && seq[i+1] == 'C' && seq[i+2] == 'T'){
+				pro[j++] = 'P';
+			}
+			if (seq[i] == 'C' && seq[i+1] == 'A' && seq[i+2] == 'C'){
+				pro[j++] = 'H';
+			}
+			if (seq[i] == 'C' && seq[i+1] == 'A' && seq[i+2] == 'T'){
+				pro[j++] = 'H';
+			}
+			if (seq[i] == 'C' && seq[i+1] == 'A' && seq[i+2] == 'A'){
+				pro[j++] = 'Q';
+			}
+			if (seq[i] == 'C' && seq[i+1] == 'A' && seq[i+2] == 'G'){
+				pro[j++] = 'Q';
+			}
+			if (seq[i] == 'C' && seq[i+1] == 'G' && seq[i+2] == 'A'){
+				pro[j++] = 'R';
+			}
+			if (seq[i] == 'C' && seq[i+1] == 'G' && seq[i+2] == 'C'){
+				pro[j++] = 'R';
+			}
+			if (seq[i] == 'C' && seq[i+1] == 'G' && seq[i+2] == 'G'){
+				pro[j++] = 'R';
+			}
+			if (seq[i] == 'C' && seq[i+1] == 'G' && seq[i+2] == 'T'){
+				pro[j++] = 'R';
+			}
+
+			if (seq[i] == 'A' && seq[i+1] == 'T' && seq[i+2] == 'A'){
+				pro[j++] = 'I';
+			}
+			if (seq[i] == 'A' && seq[i+1] == 'T' && seq[i+2] == 'C'){
+				pro[j++] = 'I';
+			}
+			if (seq[i] == 'A' && seq[i+1] == 'T' && seq[i+2] == 'T'){
+				pro[j++] = 'I';
+			}
+			if (seq[i] == 'A' && seq[i+1] == 'T' && seq[i+2] == 'G'){
+				pro[j++] = 'M';
+			}
+			if (seq[i] == 'A' && seq[i+1] == 'C' && seq[i+2] == 'A'){
+				pro[j++] = 'T';
+			}
+			if (seq[i] == 'A' && seq[i+1] == 'C' && seq[i+2] == 'C'){
+				pro[j++] = 'T';
+			}
+			if (seq[i] == 'A' && seq[i+1] == 'C' && seq[i+2] == 'G'){
+				pro[j++] = 'T';
+			}
+			if (seq[i] == 'A' && seq[i+1] == 'C' && seq[i+2] == 'T'){
+				pro[j++] = 'T';
+			}
+			if (seq[i] == 'A' && seq[i+1] == 'A' && seq[i+2] == 'C'){
+				pro[j++] = 'N';
+			}
+			if (seq[i] == 'A' && seq[i+1] == 'A' && seq[i+2] == 'T'){
+				pro[j++] = 'N';
+			}
+			if (seq[i] == 'A' && seq[i+1] == 'A' && seq[i+2] == 'A'){
+				pro[j++] = 'K';
+			}
+			if (seq[i] == 'A' && seq[i+1] == 'A' && seq[i+2] == 'G'){
+				pro[j++] = 'K';
+			}
+			if (seq[i] == 'A' && seq[i+1] == 'G' && seq[i+2] == 'C'){
+				pro[j++] = 'S';
+			}
+			if (seq[i] == 'A' && seq[i+1] == 'G' && seq[i+2] == 'T'){
+				pro[j++] = 'S';
+			}
+			if (seq[i] == 'A' && seq[i+1] == 'G' && seq[i+2] == 'A'){
+				pro[j++] = 'R';
+			}
+			if (seq[i] == 'A' && seq[i+1] == 'G' && seq[i+2] == 'G'){
+				pro[j++] = 'R';
+			}
+			if (seq[i] == 'G' && seq[i+1] == 'T' && seq[i+2] == 'A'){
+				pro[j++] = 'V';
+			}
+			if (seq[i] == 'G' && seq[i+1] == 'T' && seq[i+2] == 'C'){
+				pro[j++] = 'V';
+			}
+			if (seq[i] == 'G' && seq[i+1] == 'T' && seq[i+2] == 'G'){
+				pro[j++] = 'V';
+			}
+			if (seq[i] == 'G' && seq[i+1] == 'T' && seq[i+2] == 'T'){
+				pro[j++] = 'V';
+			}
+
+			if (seq[i] == 'G' && seq[i+1] == 'C' && seq[i+2] == 'A'){
+				pro[j++] = 'A';
+			}
+			if (seq[i] == 'G' && seq[i+1] == 'C' && seq[i+2] == 'C'){
+				pro[j++] = 'A';
+			}
+			if (seq[i] == 'G' && seq[i+1] == 'C' && seq[i+2] == 'G'){
+				pro[j++] = 'A';
+			}
+			if (seq[i] == 'G' && seq[i+1] == 'C' && seq[i+2] == 'T'){
+				pro[j++] = 'A';
+			}
+			if (seq[i] == 'G' && seq[i+1] == 'A' && seq[i+2] == 'C'){
+				pro[j++] = 'D';
+			}
+			if (seq[i] == 'G' && seq[i+1] == 'A' && seq[i+2] == 'T'){
+				pro[j++] = 'D';
+			}
+			if (seq[i] == 'G' && seq[i+1] == 'A' && seq[i+2] == 'A'){
+				pro[j++] = 'E';
+			}
+			if (seq[i] == 'G' && seq[i+1] == 'A' && seq[i+2] == 'G'){
+				pro[j++] = 'E';
+			}
+			if (seq[i] == 'G' && seq[i+1] == 'G' && seq[i+2] == 'A'){
+				pro[j++] = 'G';
+			}
+			if (seq[i] == 'G' && seq[i+1] == 'G' && seq[i+2] == 'C'){
+				pro[j++] = 'G';
+			}
+			if (seq[i] == 'G' && seq[i+1] == 'G' && seq[i+2] == 'G'){
+				pro[j++] = 'G';
+			}
+			if (seq[i] == 'G' && seq[i+1] == 'G' && seq[i+2] == 'T'){
+				pro[j++] = 'G';
+			}
+		}
+		printf("Frame %d :\n", f+1);
+		pro_len = j;
+		Output();
+		Output1000();
+		j = 0;
+	}
+}
+
+
+int main (){
+
+    Input();
+	toFasta();
+
+	return 0;
+}
